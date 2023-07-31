@@ -44,63 +44,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div
-                            class="card card-primary"
-                            style="
-                                transition: all 0.15s ease 0s;
-                                height: inherit;
-                                width: inherit;
-                            "
-                        >
-                            <div class="card-header">
-                                <h3 class="card-title">Panel de control</h3>
-                                <div class="card-tools">
-                                    <button
-                                        type="button"
-                                        class="btn btn-tool"
-                                        data-card-widget="maximize"
-                                    >
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="card">
-                                            <div class="card-body bg-primary">
-                                                <h4 class="text-center">
-                                                    ESTADO
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="card">
-                                            <div class="card-body bg-primary">
-                                                <h4 class="text-center">
-                                                    IMAGEN
-                                                </h4>
-                                                <img src="" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <Monitoreo></Monitoreo>
             <!-- /.container-fluid -->
         </section>
     </div>
 </template>
 
 <script>
+import Monitoreo from "./Monitoreo.vue";
 export default {
+    components: {
+        Monitoreo,
+    },
     data() {
         return {
             fullscreenLoading: true,

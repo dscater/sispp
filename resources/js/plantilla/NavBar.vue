@@ -20,22 +20,11 @@
                         >Inicio</router-link
                     >
                 </li>
-                <li
-                    class="nav-item d-none d-sm-inline-block"
-                    v-if="permisos.includes('ventas.create')"
-                >
-                    <router-link
-                        exact
-                        :to="{ name: 'ventas.create' }"
-                        class="nav-link text-white"
-                        >Nueva venta</router-link
-                    >
-                </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li
+                <!-- <li
                     class="nav-item dropdown"
                     v-if="permisos.includes('notificacions.index')"
                 >
@@ -88,7 +77,7 @@
                             >Ver todas las notificaciones</router-link
                         >
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a
                         class="nav-link text-white"
@@ -132,27 +121,8 @@ export default {
         if (!this.permisos) {
             this.$router.push({ name: "login" });
         }
-        this.getNotificacionsUser();
-        let self = this;
-        if (
-            this.user.tipo == "AUXILIAR DE MANTENIMIENTO" ||
-            this.user.tipo == "JEFE DE MANTENIMIENTO" ||
-            this.user.tipo == "SUPERVISOR DE COMPRAS"
-        )
-            this.notificacionInterval = setInterval(() => {
-                self.getNotificacionsUser();
-            }, 2000);
     },
     methods: {
-        getNotificacionsUser() {
-            axios
-                .get("/admin/notificacions/user/" + this.user.id)
-                .then((response) => {
-                    this.listNotificacions = response.data.notificacions;
-                    this.total_notificaciones = response.data.total;
-                    this.sin_ver = response.data.sin_ver;
-                });
-        },
         logout() {
             this.fullscreenLoading = true;
             axios.post("/logout").then((res) => {

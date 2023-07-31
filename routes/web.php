@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificacionController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +31,10 @@ Route::middleware(['auth'])->group(function () {
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
-        // areas
-        // Route::resource('areas', AreaController::class)->only([
-        //     'index', 'store', 'update', 'destroy', 'show'
-        // ]);
+        // notificacions
+        Route::resource('notificacions', NotificacionController::class)->only([
+            'index', 'store', 'update', 'destroy', 'show'
+        ]);
 
         // REPORTES
         Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);

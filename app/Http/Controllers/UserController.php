@@ -46,6 +46,11 @@ class UserController extends Controller
             'usuarios.edit',
             'usuarios.destroy',
 
+            'notificacions.index',
+            'notificacions.create',
+            'notificacions.edit',
+            'notificacions.destroy',
+
             'configuracion.index',
             'configuracion.edit',
 

@@ -81,7 +81,7 @@
                     </li>
                     <li
                         class="nav-header bg-navy"
-                        v-if="permisos.includes('users.index')"
+                        v-if="permisos.includes('users.index')||permisos.includes('notificacions.index')"
                     >
                         ADMINISTRACIÓN
                     </li>
@@ -97,6 +97,20 @@
                         >
                             <i class="nav-icon fas fa-users"></i>
                             <p>Usuarios</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('notificacions.index')"
+                    >
+                        <router-link
+                            exact
+                            :to="{ name: 'notificacions.index' }"
+                            class="nav-link"
+                            v-loading.fullscreen.lock="fullscreenLoading"
+                        >
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>Notificaciones</p>
                         </router-link>
                     </li>
                     <li

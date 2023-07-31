@@ -43,6 +43,15 @@ export default new Router({
             props: true,
         },
 
+        
+        // notificacions
+        {
+            path: "/notificacions",
+            name: "notificacions.index",
+            component: require("./components/modulos/notificacions/index.vue")
+                .default,
+        },
+
         // Reportes
         {
             path: "/reportes/usuarios",
