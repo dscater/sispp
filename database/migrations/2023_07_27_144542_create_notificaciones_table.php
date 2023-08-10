@@ -19,6 +19,7 @@ class CreateNotificacionesTable extends Migration
             $table->string("indumentaria");
             $table->date("fecha");
             $table->time("hora");
+            $table->string("imagen", 255);
             $table->timestamps();
         });
     }

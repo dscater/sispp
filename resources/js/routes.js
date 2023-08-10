@@ -60,6 +60,20 @@ export default new Router({
                 .default,
             props: true,
         },
+        {
+            path: "/reportes/proteccion_personal",
+            name: "reportes.proteccion_personal",
+            component: require("./components/modulos/reportes/proteccion_personal.vue")
+                .default,
+            props: true,
+        },
+        {
+            path: "/reportes/g_proteccion_personal",
+            name: "reportes.g_proteccion_personal",
+            component: require("./components/modulos/reportes/g_proteccion_personal.vue")
+                .default,
+            props: true,
+        },
 
         // PÁGINA NO ENCONTRADA
         {

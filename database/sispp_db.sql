@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-07-2023 a las 16:04:05
+-- Tiempo de generación: 10-08-2023 a las 15:10:02
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -81,10 +81,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `notificaciones` (
   `id` bigint UNSIGNED NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `indumentaria` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `indumentaria` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
+  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -138,7 +140,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `dir`, `correo`, `fono`, `tipo`, `foto`, `password`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'admin', 'admin', NULL, '0', '', '', NULL, NULL, 'ADMINISTRADOR', NULL, '$2y$10$RrCZZySOwPej2gMFWsrjMe6dLzfaL5Q88h4J75I1FesEBRNPwq1x.', '2023-07-26', NULL, NULL),
-(2, 'JPERES', 'JUAN', 'PERES', 'MAMANI', '1234', 'LP', 'LOS OLIVOS', 'juan@gmail.com', '22222; 666666', 'AUXILIAR', 'default.png', '$2y$10$f3hqgSdCgFjYIrFmjADeg.6tH1SAF14ghWq4skkVPw.OWpebfC4Ku', '2023-07-29', '2023-07-29 15:48:06', '2023-07-29 15:48:06');
+(2, 'JPERES', 'JUAN', 'PERES', 'MAMANI', '1234', 'LP', 'LOS OLIVOS', 'juan@gmail.com', '22222; 666666', 'AUXILIAR', 'default.png', '$2y$10$f3hqgSdCgFjYIrFmjADeg.6tH1SAF14ghWq4skkVPw.OWpebfC4Ku', '2023-07-29', '2023-07-29 15:48:06', '2023-07-31 00:55:38');
 
 --
 -- Índices para tablas volcadas

@@ -10,7 +10,9 @@
                 "
             >
                 <div class="card-header">
-                    <h3 class="card-title">MONITOREO DE CONTROL DE PROTECCIÓN DE PERSONAL</h3>
+                    <h3 class="card-title">
+                        MONITOREO DE CONTROL DE PROTECCIÓN DE PERSONAL
+                    </h3>
                     <div class="card-tools">
                         <button
                             type="button"
@@ -24,15 +26,21 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body bg-primary text-center">
                                     <h4 class="text-center">ESTADO</h4>
-                                    <span
-                                        class="text-md badge badge-success"
-                                        v-if="notificacion"
-                                        >NORMAL</span
-                                    >
+                                    <template v-if="notificacion && notificacion.id">
+                                        <span
+                                            class="text-md badge"
+                                            :class="[
+                                                notificacion.tipo == 'NORMAL'
+                                                    ? 'badge-success'
+                                                    : 'badge-danger',
+                                            ]"
+                                            >{{ notificacion.tipo }}</span
+                                        >
+                                    </template>
                                     <span class="text-md badge bg-gray" v-else
                                         >SIN NOTIFICACIONES AÚN</span
                                     >
@@ -43,11 +51,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="card">
-                                <div class="card-body bg-primary text-center">
+                                <div
+                                    class="card-body bg-primary text-center imagen_monitoreo"
+                                >
                                     <h4 class="text-center">IMAGEN</h4>
-                                    <img src="" alt="" v-if="notificacion" />
+                                    <img
+                                        v-if="notificacion && notificacion.id"
+                                        :src="notificacion.path_image"
+                                        alt=""
+                                    />
                                     <div class="vacio" v-else></div>
                                 </div>
                             </div>
@@ -73,11 +87,27 @@ export default {
     },
     mounted() {
         this.loadingWindow.close();
-        this.getUltimaNotificacion();
         setInterval(this.getHora, 1000);
+        setInterval(this.getUltimaNotificacion, 1000);
     },
     methods: {
-        getUltimaNotificacion() {},
+        getUltimaNotificacion() {
+            axios
+                .get("/admin/notificacions/getNuevaNotificacion")
+                .then((response) => {
+                    if (!response.data) {
+                        this.notificacion = null;
+                    } else {
+                        if (!this.notificacion) {
+                            this.notificacion = response.data;
+                        } else {
+                            if (this.notificacion.id != response.data.id) {
+                                this.notificacion = response.data;
+                            }
+                        }
+                    }
+                });
+        },
         getHora() {
             let now = new Date();
             let h = now.getHours();
@@ -102,6 +132,10 @@ export default {
     height: 240px;
     min-width: 100%;
     background: black;
-    margin:auto;
+    margin: auto;
+}
+
+.contenedor_monitoreo .imagen_monitoreo img {
+    width: 100%;
 }
 </style>

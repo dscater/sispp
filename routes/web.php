@@ -7,6 +7,9 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+// RECIBIR NOTIFICACION
+Route::post('/recibe_notificacion', [NotificacionController::class, 'recibeNotificacion']);
+
 // LOGIN
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -32,12 +35,15 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         // notificacions
+        Route::get('notificacions/getNuevaNotificacion', [NotificacionController::class, 'getNuevaNotificacion']);
         Route::resource('notificacions', NotificacionController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);
 
         // REPORTES
         Route::post('reportes/usuarios', [ReporteController::class, 'usuarios']);
+        Route::post('reportes/proteccion_personal', [ReporteController::class, 'proteccion_personal']);
+        Route::post('reportes/g_proteccion_personal', [ReporteController::class, 'g_proteccion_personal']);
     });
 });
 

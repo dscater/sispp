@@ -81,7 +81,10 @@
                     </li>
                     <li
                         class="nav-header bg-navy"
-                        v-if="permisos.includes('users.index')||permisos.includes('notificacions.index')"
+                        v-if="
+                            permisos.includes('users.index') ||
+                            permisos.includes('notificacions.index')
+                        "
                     >
                         ADMINISTRACIÓN
                     </li>
@@ -115,7 +118,11 @@
                     </li>
                     <li
                         class="nav-header bg-navy"
-                        v-if="permisos.includes('reportes.usuarios')"
+                        v-if="
+                            permisos.includes('reportes.usuarios') ||
+                            permisos.includes('reportes.proteccion_personal')||
+                            permisos.includes('reportes.g_proteccion_personal')
+                        "
                     >
                         REPORTES
                     </li>
@@ -129,6 +136,30 @@
                         >
                             <i class="fas fa-file-pdf nav-icon"></i>
                             <p>Lista de Usuarios</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.proteccion_personal')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.proteccion_personal' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-file-pdf nav-icon"></i>
+                            <p>Notificaciones de Protección Personal</p>
+                        </router-link>
+                    </li>
+                    <li
+                        class="nav-item"
+                        v-if="permisos.includes('reportes.g_proteccion_personal')"
+                    >
+                        <router-link
+                            :to="{ name: 'reportes.g_proteccion_personal' }"
+                            class="nav-link"
+                        >
+                            <i class="fas fa-chart-bar nav-icon"></i>
+                            <p>Gráfico de Notificaciones de Protección Personal</p>
                         </router-link>
                     </li>
                     <li class="nav-header bg-navy">OTRAS OPCIONES</li>
