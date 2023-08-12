@@ -93,6 +93,7 @@ class NotificacionController extends Controller
         }
         $nueva_notificacion->hora = date("H:i:s");
         $nueva_notificacion->fecha = date("Y-m-d");
+        $nueva_notificacion->visto = 0;
 
         // antes de guardar verificar que no existe uno igual mediante la columna INDUMENTARIA
         $ultimo = Notificacion::where("tipo", "ALERTA")->get()->last();
