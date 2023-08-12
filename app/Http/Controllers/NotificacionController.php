@@ -63,13 +63,13 @@ class NotificacionController extends Controller
         // Log::debug(count($array_uniforme_existente));
         $array_uniforme_existente = explode(",", $request->input('uniforme_existente'));
         $tipo_notificacion = "NORMAL";
+        $array_indu_faltante = [];
         if (count($array_uniforme_existente) >= 8) {
             $tipo_notificacion = "NORMAL";
         } else {
             // si se detecta falta de uniforme crear la notificación en ALERTA
             $tipo_notificacion = "ALERTA";
             $descripcion = "NO PORTA";
-            $array_indu_faltante = [];
             // ARMANDO DESCRIPCIÓN E INDUMENTARIA FALTANTE
             foreach ($indumentaria as $key => $indu) {
                 if (!in_array($indu, $array_uniforme_existente)) {
