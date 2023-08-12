@@ -64,6 +64,7 @@ class NotificacionController extends Controller
         $array_uniforme_existente = explode(",", $request->input('uniforme_existente'));
         $tipo_notificacion = "NORMAL";
         $array_indu_faltante = [];
+        $descripcion = "";
         if (count($array_uniforme_existente) >= 8) {
             $tipo_notificacion = "NORMAL";
         } else {
