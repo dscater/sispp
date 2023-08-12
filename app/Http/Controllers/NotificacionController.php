@@ -102,9 +102,9 @@ class NotificacionController extends Controller
             $nueva_notificacion->fecha = date("Y-m-d");
             $nueva_notificacion->visto = 0;
             $nueva_notificacion->save();
+            Notificacion::vaciaNormales($nueva_notificacion->id);
         }
 
-        Notificacion::vaciaNormales($nueva_notificacion->id);
         return response()->JSON(true, 200);
     }
 }
