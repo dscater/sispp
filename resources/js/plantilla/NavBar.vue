@@ -24,14 +24,14 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- <li
+                <li
                     class="nav-item dropdown"
                     v-if="permisos.includes('notificacions.index')"
                 >
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell text-white text-md"></i>
                         <span
-                            class="badge badge-warning navbar-badge"
+                            class="badge badge-danger navbar-badge"
                             v-if="sin_ver > 0"
                             v-text="sin_ver"
                         ></span>
@@ -50,6 +50,9 @@
                             >
                                 <router-link
                                     class="dropdown-item notificacion"
+                                    :class="[
+                                        item.visto == 0 ? 'bg-danger' : '',
+                                    ]"
                                     :to="{
                                         name: 'notificacions.show',
                                         params: {
@@ -59,11 +62,14 @@
                                 >
                                     <i class="fas fa-file mr-2"></i>
                                     <span class="desc_notificacion">{{
-                                        item.notificacion.notificacion
+                                        item.descripcion
                                     }}</span>
                                     <span
                                         class="float-right text-muted text-sm"
-                                        >{{ item.notificacion.hace }}</span
+                                        :class="[
+                                            item.visto == 0 ? 'text-white' : '',
+                                        ]"
+                                        >{{ item.hace }}</span
                                     >
                                 </router-link>
                                 <div class="dropdown-divider"></div>
@@ -77,7 +83,7 @@
                             >Ver todas las notificaciones</router-link
                         >
                     </div>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <a
                         class="nav-link text-white"
@@ -121,6 +127,8 @@ export default {
         if (!this.permisos) {
             this.$router.push({ name: "login" });
         }
+        this.getNotificaciones();
+        setInterval(this.getNotificaciones, 2000);
     },
     methods: {
         logout() {
@@ -131,6 +139,13 @@ export default {
                     location.reload();
                     this.$router.push({ name: "login" });
                 }, 500);
+            });
+        },
+        getNotificaciones() {
+            axios.get("/admin/notificacions/orderByLast").then((response) => {
+                this.listNotificacions = response.data.notificacions;
+                this.sin_ver = response.data.no_vistos;
+                this.total_notificaciones = response.data.total;
             });
         },
     },

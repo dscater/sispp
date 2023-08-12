@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div
                         class="col-12 col-sm-6 col-md-3"
                         v-for="(item, index) in listInfoBox"
@@ -43,9 +43,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <Monitoreo></Monitoreo>
             </div>
-            <Monitoreo></Monitoreo>
             <!-- /.container-fluid -->
         </section>
     </div>

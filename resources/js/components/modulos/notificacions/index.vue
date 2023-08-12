@@ -63,16 +63,24 @@
                                                 empty-filtered-text="Sin resultados"
                                                 :filter="filter"
                                             >
-                                                <!-- <template
-                                                    #cell(fecha_registro)="row"
-                                                >
-                                                    {{
-                                                        formatoFecha(
-                                                            row.item
-                                                                .fecha_registro
-                                                        )
-                                                    }}
-                                                </template> -->
+                                                <template #cell(accion)="row">
+                                                    <b-button
+                                                        size="sm"
+                                                        pill
+                                                        variant="outline-primary"
+                                                        class="btn-flat btn-block"
+                                                        title="Ver registro"
+                                                        @click="
+                                                            verNotificacion(
+                                                                row.item
+                                                            )
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa fa-eye"
+                                                        ></i>
+                                                    </b-button>
+                                                </template>
                                             </b-table>
                                         </b-overlay>
                                         <div class="row">
@@ -128,6 +136,7 @@ export default {
                 { key: "indumentaria", label: "Indumentaria", sortable: true },
                 { key: "fecha", label: "Fecha", sortable: true },
                 { key: "hora", label: "Hora", sortable: true },
+                { key: "accion", label: "Acción" },
             ],
             loading: true,
             fullscreenLoading: true,
@@ -175,6 +184,14 @@ export default {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
+        },
+        verNotificacion(item) {
+            this.$router.push({
+                name: "notificacions.show",
+                params: {
+                    id: item.id,
+                },
+            });
         },
     },
 };

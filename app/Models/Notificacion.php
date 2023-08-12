@@ -18,15 +18,21 @@ class Notificacion extends Model
         "fecha",
         "hora",
         "imagen",
+        "visto"
     ];
 
-    protected $appends = ['path_image'];
+    protected $appends = ['path_image', 'hace'];
     public function getPathImageAttribute()
     {
         if ($this->imagen && trim($this->imagen) != "") {
             return asset('imgs/notificaciones/' . $this->imagen);
         }
         return asset('imgs/notificaciones/default.png');
+    }
+
+    public function getHaceAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
     // FUNCION PARA VACIAR LAS IMAGENES CON ENTRADAS NORMALES

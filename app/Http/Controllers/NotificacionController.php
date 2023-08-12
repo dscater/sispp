@@ -14,6 +14,21 @@ class NotificacionController extends Controller
         return response()->JSON(['notificacions' => $notificacions, 'total' => count($notificacions)], 200);
     }
 
+    public function orderByLast()
+    {
+        $notificacions = Notificacion::where("tipo", "ALERTA")->orderBy("created_at", "desc")->get();
+        $no_vistos = count(Notificacion::where("tipo", "ALERTA")
+            ->where("visto", 0)
+            ->get());
+        return response()->JSON(['notificacions' => $notificacions, 'no_vistos' => $no_vistos, 'total' => count($notificacions)], 200);
+    }
+
+    public function show(Notificacion $notificacion)
+    {
+        $notificacion->update(["visto" => 1]);
+        return response()->JSON($notificacion);
+    }
+
     public function getNuevaNotificacion()
     {
         $notificacion = Notificacion::get()->last();
@@ -78,7 +93,17 @@ class NotificacionController extends Controller
         }
         $nueva_notificacion->hora = date("H:i:s");
         $nueva_notificacion->fecha = date("Y-m-d");
-        $nueva_notificacion->save();
+
+        // antes de guardar verificar que no existe uno igual mediante la columna INDUMENTARIA
+        $ultimo = Notificacion::where("tipo", "ALERTA")->get()->last();
+        if ($ultimo) {
+            if ($ultimo->indumentaria != $nueva_notificacion->indumentaria) {
+                $nueva_notificacion->save();
+            }
+        } else {
+            $nueva_notificacion->save();
+        }
+
         Notificacion::vaciaNormales($nueva_notificacion->id);
         return response()->JSON(true, 200);
     }

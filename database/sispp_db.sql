@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 10-08-2023 a las 15:10:02
+-- Tiempo de generación: 12-08-2023 a las 17:10:41
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -29,17 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `configuracions` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre_sistema` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `razon_social` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `web` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `actividad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_sistema` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `razon_social` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `web` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `actividad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -59,7 +59,7 @@ INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -81,15 +81,28 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `notificaciones` (
   `id` bigint UNSIGNED NOT NULL,
-  `tipo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `indumentaria` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visto` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `notificaciones`
+--
+
+INSERT INTO `notificaciones` (`id`, `tipo`, `descripcion`, `indumentaria`, `fecha`, `hora`, `imagen`, `visto`, `created_at`, `updated_at`) VALUES
+(1, 'ALERTA', 'NO PORTA, CHAQUETA AZUL, CHALECO DE SEGURIDAD, LENTES DE SEGURIDAD, PROTECTOR AUDITIVO', 'CHAQUETA AZUL,CHALECO DE SEGURIDAD,LENTES DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:38:47', '1691685527.jpg', 1, '2023-08-10 16:38:47', '2023-08-12 17:07:31'),
+(2, 'ALERTA', 'NO PORTA, CHAQUETA AZUL, CHALECO DE SEGURIDAD, LENTES DE SEGURIDAD, PROTECTOR AUDITIVO', 'CHAQUETA AZUL,CHALECO DE SEGURIDAD,LENTES DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:38:55', '1691685535.jpg', 0, '2023-08-10 16:38:55', '2023-08-10 16:38:55'),
+(3, 'ALERTA', 'NO PORTA, CHAQUETA AZUL, CHALECO DE SEGURIDAD, LENTES DE SEGURIDAD, PROTECTOR AUDITIVO', 'CHAQUETA AZUL,CHALECO DE SEGURIDAD,LENTES DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:39:05', '1691685545.jpg', 1, '2023-08-10 16:39:05', '2023-08-12 17:07:36'),
+(6, 'ALERTA', 'NO PORTA, CHAQUETA AZUL, CHALECO DE SEGURIDAD, LENTES DE SEGURIDAD, BOTAS DE SEGURIDAD, PROTECTOR AUDITIVO', 'CHAQUETA AZUL,CHALECO DE SEGURIDAD,LENTES DE SEGURIDAD,BOTAS DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:43:04', '1691685784.jpg', 0, '2023-08-10 16:43:04', '2023-08-10 16:43:04'),
+(7, 'ALERTA', 'NO PORTA, CHAQUETA AZUL, CHALECO DE SEGURIDAD, GUANTES DE SEGURIDAD, LENTES DE SEGURIDAD, CASCO DE SEGURIDAD, PROTECTOR AUDITIVO', 'CHAQUETA AZUL,CHALECO DE SEGURIDAD,GUANTES DE SEGURIDAD,LENTES DE SEGURIDAD,CASCO DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:43:14', '1691685794.jpg', 0, '2023-08-10 16:43:14', '2023-08-10 16:43:14'),
+(8, 'ALERTA', 'NO PORTA PANTALÓN AZUL, CHAQUETA AZUL, CHALECO DE SEGURIDAD, GUANTES DE SEGURIDAD, BOTAS DE SEGURIDAD, CASCO DE SEGURIDAD, PROTECTOR AUDITIVO', 'PANTALÓN AZUL,CHAQUETA AZUL,CHALECO DE SEGURIDAD,GUANTES DE SEGURIDAD,BOTAS DE SEGURIDAD,CASCO DE SEGURIDAD,PROTECTOR AUDITIVO', '2023-08-10', '12:44:04', '1691685844.jpg', 1, '2023-08-10 16:44:04', '2023-08-12 17:08:09');
 
 -- --------------------------------------------------------
 
@@ -99,11 +112,11 @@ CREATE TABLE `notificaciones` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -117,18 +130,18 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ci` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo` enum('ADMINISTRADOR','AUXILIAR') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ci` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` enum('ADMINISTRADOR','AUXILIAR') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -199,7 +212,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`

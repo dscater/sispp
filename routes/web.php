@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
 
         // notificacions
         Route::get('notificacions/getNuevaNotificacion', [NotificacionController::class, 'getNuevaNotificacion']);
+        Route::get('notificacions/orderByLast', [NotificacionController::class, 'orderByLast']);
         Route::resource('notificacions', NotificacionController::class)->only([
             'index', 'store', 'update', 'destroy', 'show'
         ]);

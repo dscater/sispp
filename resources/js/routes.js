@@ -51,6 +51,13 @@ export default new Router({
             component: require("./components/modulos/notificacions/index.vue")
                 .default,
         },
+        {
+            path: "/notificacions/show/:id",
+            name: "notificacions.show",
+            component: require("./components/modulos/notificacions/show.vue")
+                .default,
+            props: true,
+        },
 
         // Reportes
         {
