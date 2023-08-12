@@ -62,12 +62,12 @@ class NotificacionController extends Controller
         // Log::debug($request->input('uniforme_existente'));
         // Log::debug(count($array_uniforme_existente));
         $array_uniforme_existente = explode(",", $request->input('uniforme_existente'));
-        $nueva_notificacion = new Notificacion();
+        $tipo_notificacion = "NORMAL";
         if (count($array_uniforme_existente) >= 8) {
-            $nueva_notificacion->tipo = "NORMAL";
+            $tipo_notificacion = "NORMAL";
         } else {
             // si se detecta falta de uniforme crear la notificación en ALERTA
-            $nueva_notificacion->tipo = "ALERTA";
+            $tipo_notificacion = "ALERTA";
             $descripcion = "NO PORTA";
             $array_indu_faltante = [];
             // ARMANDO DESCRIPCIÓN E INDUMENTARIA FALTANTE
@@ -82,26 +82,25 @@ class NotificacionController extends Controller
                     $array_indu_faltante[] = $txt_indu;
                 }
             }
-            $nueva_notificacion->descripcion = $descripcion;
-            $nueva_notificacion->indumentaria = implode(",", $array_indu_faltante);
         }
-        if ($request->hasFile('image')) {
-            $image = $request["image"];
-            $nom_img = time() . '.' . $image->getClientOriginalExtension();
-            $nueva_notificacion->imagen = $nom_img;
-            $image->move(public_path() . '/imgs/notificaciones/', $nom_img);
-        }
-        $nueva_notificacion->hora = date("H:i:s");
-        $nueva_notificacion->fecha = date("Y-m-d");
-        $nueva_notificacion->visto = 0;
-
+        $indumentaria = implode(",", $array_indu_faltante);
         // antes de guardar verificar que no existe uno igual mediante la columna INDUMENTARIA
         $ultimo = Notificacion::where("tipo", "ALERTA")->get()->last();
-        if ($ultimo) {
-            if ($ultimo->indumentaria != $nueva_notificacion->indumentaria) {
-                $nueva_notificacion->save();
+        if (!$ultimo || $ultimo->indumentaria != $indumentaria) {
+            $nueva_notificacion = new Notificacion();
+            $nueva_notificacion->tipo = $tipo_notificacion;
+            $nueva_notificacion->descripcion = $descripcion;
+            $nueva_notificacion->indumentaria = $indumentaria;
+
+            if ($request->hasFile('image')) {
+                $image = $request["image"];
+                $nom_img = time() . '.' . $image->getClientOriginalExtension();
+                $nueva_notificacion->imagen = $nom_img;
+                $image->move(public_path() . '/imgs/notificaciones/', $nom_img);
             }
-        } else {
+            $nueva_notificacion->hora = date("H:i:s");
+            $nueva_notificacion->fecha = date("Y-m-d");
+            $nueva_notificacion->visto = 0;
             $nueva_notificacion->save();
         }
 
