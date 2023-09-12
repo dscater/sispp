@@ -51,8 +51,19 @@
                                                 v-text="oNotificacion?.hora"
                                             ></span>
                                         </p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img
+                                                    :src="
+                                                        oNotificacion?.path_image
+                                                    "
+                                                    alt="Imagen"
+                                                    width="100%"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mt-3">
                                         <router-link
                                             :to="{
                                                 name: 'notificacions.index',

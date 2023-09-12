@@ -95,7 +95,7 @@ class NotificacionController extends Controller
 
             if ($request->hasFile('image')) {
                 $image = $request["image"];
-                $nom_img = time() . '.' . $image->getClientOriginalExtension();
+                $nom_img = time() . random_int(1, 1000) . '.' . $image->getClientOriginalExtension();
                 $nueva_notificacion->imagen = $nom_img;
                 $image->move(public_path() . '/imgs/notificaciones/', $nom_img);
             }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Notificacion extends Model
 {
@@ -38,10 +39,18 @@ class Notificacion extends Model
     // FUNCION PARA VACIAR LAS IMAGENES CON ENTRADAS NORMALES
     public static function vaciaNormales($id)
     {
-        $notificacions = Notificacion::where("id", "<", $id)->where("tipo", "NORMAL")->get();
-        foreach ($notificacions as $n) {
-            \File::delete(public_path() . "/imgs/notificaciones/" . $n->imagen);
-            $n->delete();
+        $ultima_notificacion = Notificacion::get()->last();
+        if ($ultima_notificacion) {
+            $notificacions = Notificacion::where("id", "<", $id)->where("tipo", "NORMAL")->get();
+            foreach ($notificacions as $n) {
+                // Log::debug($n->id);
+                // Log::debug($n->tipo);
+                // Log::debug($n->imagen);
+                if ($n->id != $ultima_notificacion->id) {
+                    \File::delete(public_path() . "/imgs/notificaciones/" . $n->imagen);
+                    $n->delete();
+                }
+            }
         }
 
         return true;
