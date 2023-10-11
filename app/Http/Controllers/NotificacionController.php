@@ -58,10 +58,12 @@ class NotificacionController extends Controller
             "casco" => "CASCO DE SEGURIDAD",
             "auditivo" => "PROTECTOR AUDITIVO",
         ];
+        $array_uniforme_existente = explode(",", $request->input('uniforme_existente'));
         // Log::debug($request->prueba);
         // Log::debug($request->input('uniforme_existente'));
         // Log::debug(count($array_uniforme_existente));
-        $array_uniforme_existente = explode(",", $request->input('uniforme_existente'));
+        $array_uniforme_existente =  array_unique($array_uniforme_existente);
+        $array_uniforme_existente =  array_values($array_uniforme_existente);
         $tipo_notificacion = "NORMAL";
         $array_indu_faltante = [];
         $descripcion = "";
